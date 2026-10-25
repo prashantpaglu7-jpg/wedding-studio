@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Editorial light palette */
+    --ivory: 0 0% 98%;            /* #FAFAFA */
+    --champagne: 30 33% 94%;      /* #F5F0EB */
+    --charcoal: 0 0% 11%;         /* #1C1C1C */
+    --gold: 46 65% 52%;           /* #D4AF37 */
+    --rosegold: 24 36% 57%;       /* #B98A6B */
+    --ink: 0 0% 11%;
+
+    --background: 0 0% 98%;
+    --foreground: 0 0% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 11%;
+    --primary: 0 0% 11%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 30 33% 94%;
+    --secondary-foreground: 0 0% 11%;
+    --muted: 30 33% 94%;
+    --muted-foreground: 30 6% 41%;
+    --accent: 30 33% 94%;
+    --accent-foreground: 0 0% 11%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 16% 88%;
+    --input: 30 16% 86%;
+    --ring: 46 65% 52%;
+    --chart-1: 46 65% 52%;
+    --chart-2: 24 36% 57%;
+    --chart-3: 0 0% 11%;
+    --chart-4: 30 33% 74%;
+    --chart-5: 0 0% 55%;
+    --radius: 0.25rem;
+    --font-heading: "Playfair Display", ui-serif, Georgia, serif;
+    --font-display: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+    --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --sidebar-background: 30 33% 94%;
+    --sidebar-foreground: 0 0% 11%;
+    --sidebar-primary: 0 0% 11%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 30 33% 90%;
+    --sidebar-accent-foreground: 0 0% 11%;
+    --sidebar-border: 30 16% 88%;
+    --sidebar-ring: 46 65% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-size: 1rem;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background: hsl(var(--gold) / 0.3);
+    color: hsl(var(--charcoal));
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.45;
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .tracking-luxe {
+    letter-spacing: 0.26em;
+  }
+
+  .tracking-wide-luxe {
+    letter-spacing: 0.18em;
+  }
+
+  /* Scroll reveal — pure CSS transition, toggled by a single observer */
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+    transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Hero entrance */
+  .rise {
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Client love marquee */
+  .marquee-track {
+    animation: marquee 52s linear infinite;
+  }
+
+  .marquee-wrap:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 7%, black 93%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 7%, black 93%, transparent);
+  }
+
+  /* WhatsApp pulsing ring */
+  .wa-pulse::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+    animation: waPulse 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes waPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .rise,
+  .marquee-track,
+  .wa-pulse::after {
+    animation: none;
+  }
+}
+
+/* Push44 – Permanently hide Base44 branding badge */
+#base44-edit-badge, #base44-badge, .base44-badge, div[id*='base44'], [data-base44-badge], .made-with-base44, [class*='base44'], #admin-footer {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
